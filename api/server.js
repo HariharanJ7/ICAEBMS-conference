@@ -68,7 +68,13 @@ process.on('unhandledRejection', (e) => console.error('unhandledRejection', e));
 process.on('uncaughtException', (e) => console.error('uncaughtException', e));
 
 async function init() {
-  await mongoose.connect(MONGO_URI);
+  await mongoose.connect(MONGO_URI, {
+    useNewUrlParser: true,      // Use new URL parser
+    useUnifiedTopology: true,   // Use unified topology engine
+    serverSelectionTimeoutMS: 10000, // 10 sec timeout
+    ssl: true,                  // Enable SSL
+    tlsInsecure: false           // Do not allow insecure TLS
+  });
   await sequelize.sync({ alter: true });
   console.log('MongoDB and Sequelize ready.');
 }
