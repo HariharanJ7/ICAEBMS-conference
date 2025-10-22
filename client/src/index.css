@@ -1,0 +1,81 @@
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+
+@import "tailwindcss";
+html { scroll-behavior: smooth; }
+
+/* your optional extra styles */
+/* @layer components {
+.btn { @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition shadow; }
+.btn-primary { @apply btn bg-[#0f4c81] text-white hover:shadow-lg; }
+.btn-ghost { @apply btn bg-white border border-slate-300 text-slate-800 hover:bg-slate-50; }
+.chip { @apply inline-flex items-center rounded-full bg-slate-50 border text-slate-700 px-3 py-1 text-xs; }
+.card { @apply rounded-3xl bg-white border shadow-[0_20px_60px_-24px_rgba(16,24,40,.25)]; }
+.section { @apply py-16; }
+.container { @apply max-w-7xl mx-auto px-4; }
+}
+@layer utilities {
+.marquee { @apply overflow-hidden whitespace-nowrap; }
+.marquee > span { animation: marquee 18s linear infinite; @apply inline-block pr-24; }
+@keyframes marquee { 0% { transform: translateX(0) } 100% { transform: translateX(-100%) } }
+} */
+
+/* 1) Theme tokens (defaults) */
+:root {
+--brand: #0f4c81; 
+--on-brand: #ffffff; 
+--grad-from: #e6f0f9;
+--grad-to: #ffffff; 
+}
+
+
+/* 2) Theme presets with high contrast (WCAG-friendly pairs) */
+.theme-ocean { --brand:#0f4c81; --on-brand:#ffffff; --grad-from:#e6f0f9; --grad-to:#ffffff; } 
+.theme-emerald { --brand:#0c7c59; --on-brand:#ffffff; --grad-from:#e6f8f3; --grad-to:#ffffff; } 
+.theme-royal { --brand:#4338ca; --on-brand:#ffffff; --grad-from:#eef2ff; --grad-to:#ffffff; } 
+.theme-amber { --brand:#b45309; --on-brand:#ffffff; --grad-from:#fff7ed; --grad-to:#ffffff; } 
+.theme-rose { --brand:#be123c; --on-brand:#ffffff; --grad-from:#fff1f2; --grad-to:#ffffff; } 
+.theme-sapphire { --brand:#1e40af; --on-brand:#ffffff; --grad-from:#e0e7ff; --grad-to:#ffffff; } 
+.theme-violet { --brand:#6d28d9; --on-brand:#ffffff; --grad-from:#f5f3ff; --grad-to:#ffffff; } 
+.theme-slate { --brand:#334155; --on-brand:#ffffff; --grad-from:#f1f5f9; --grad-to:#ffffff; }
+/* 3) Brand-aware utilities used by pages */
+@layer components {
+.btn { @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition shadow; }
+.btn-primary { @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition shadow hover:shadow-lg; color: var(--on-brand); background-color: var(--brand); }
+.btn-ghost { @apply inline-flex items-center justify-center rounded-full px-5 py-3 text-sm font-semibold transition shadow bg-white border border-slate-300 text-slate-800 hover:bg-slate-50; }
+.brand-text { color: var(--brand); }
+.brand-bg { background-color: var(--brand); }
+.chip { @apply inline-flex items-center rounded-full bg-slate-50 border text-slate-700 px-3 py-1 text-xs; }
+.card { @apply rounded-3xl bg-white border shadow-[0_20px_60px_-24px_rgba(16,24,40,.25)]; }
+.section { @apply py-16; }
+.container { @apply max-w-7xl mx-auto px-4; }
+.hero-grad { background: conic-gradient(at top left, var(--grad-from), var(--grad-to)); }
+}
+@layer utilities {
+.marquee { @apply overflow-hidden whitespace-nowrap; }
+.marquee > span { animation: marquee 18s linear infinite; @apply inline-block pr-24; }
+@keyframes fadeUp { from { opacity:0; transform: translateY(14px) } to { opacity:1; transform: translateY(0) } }
+.animate-fade-up { animation: fadeUp .7s ease-out both; }
+
+/* subtle float (for collage images) */
+@keyframes floatY { 0%,100%{ transform: translateY(0) } 50%{ transform: translateY(-6px) } }
+.animate-float { animation: floatY 5s ease-in-out infinite; }
+.animate-float-slow { animation: floatY 7s ease-in-out infinite; }
+
+/* pop (chips/cards) */
+@keyframes popIn { 0%{opacity:0; transform: scale(.96)} 100%{opacity:1; transform: scale(1)} }
+.animate-pop { animation: popIn .35s ease-out both; }
+
+/* shimmer underline bar */
+@keyframes barGrow { from{width:0} to{width:100%} }
+.underline-grow { position: relative; }
+.underline-grow::after {
+content:'';
+position:absolute; left:0; bottom:-6px; height:3px; width:0;
+background: var(--brand); border-radius:9999px;
+animation: barGrow .8s .15s ease-out forwards;
+}
+
+@keyframes marquee { 0% { transform: translateX(0) } 100% { transform: translateX(-100%) } }
+}
