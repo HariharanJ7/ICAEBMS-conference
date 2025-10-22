@@ -1,4 +1,4 @@
-# Conference Site (React + Node + MySQL)
+# Conference Site (React + Node + MongoDB + Tailwind CSS)
 
 This archive contains a React frontend and Node.js/Express backend for a conference website (ICAEBMS).
 
