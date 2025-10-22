@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FaInfoCircle, FaCalendarAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
+const API_BASE = import.meta.env.VITE_API_URL;
 // Theme configurations
 const themeConfig = {
   'theme-sapphire': {
@@ -50,7 +51,7 @@ export default function ContentPage({ keyName, themeName }) {
   const theme = themeConfig[getThemeName()];
   
   useEffect(() => { 
-    fetch(`/api/content/${keyName}`).then(r=>r.json()).then(setContent); 
+    fetch(`${API_BASE}/api/content/${keyName}`).then(r=>r.json()).then(setContent); 
   }, [keyName]);
   
   if (!content) return <div className="max-w-7xl mx-auto px-4 py-20">Loading...</div>;

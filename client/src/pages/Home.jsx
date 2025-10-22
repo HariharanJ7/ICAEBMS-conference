@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+const API_BASE = import.meta.env.VITE_API_URL;
 /* tiny helper for staggered delays via style prop */
 const delay = ms => ({ animationDelay: `${ms}ms` });
 
 export default function Home() {
   const [content, setContent] = React.useState(null);
-  useEffect(() => { fetch('/api/content/home').then(r=>r.json()).then(setContent); }, []);
+  useEffect(() => { fetch(`${API_BASE}/api/content/home`).then(r=>r.json()).then(setContent); }, []);
   if (!content) return <div className="container py-16">Loading...</div>;
 
   // Default content if API fails

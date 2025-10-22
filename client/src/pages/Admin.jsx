@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FiUsers, FiFileText, FiLock, FiDownload, FiMail, FiCalendar, FiUser, FiTag, FiRefreshCw } from 'react-icons/fi';
 
+const API_BASE = import.meta.env.VITE_API_URL;
+
 export default function Admin() {
   const [creds, setCreds] = useState({ u: '', p: '' });
   const [users, setUsers] = useState([]);
@@ -15,8 +17,8 @@ export default function Admin() {
     setStatus('Loading...');
     try {
       const [ru, rs] = await Promise.all([
-        fetch('/api/admin/users', { headers }),
-        fetch('/api/admin/submissions', { headers })
+        fetch(`${API_BASE}/api/admin/users`, { headers }),
+        fetch(`${API_BASE}/api/admin/submissions`, { headers })
       ]);
       
       if (!ru.ok || !rs.ok) { 

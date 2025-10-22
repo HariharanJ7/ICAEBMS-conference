@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FiFileText, FiUser, FiMail, FiTag, FiUpload, FiSend, FiCalendar, FiInfo } from 'react-icons/fi';
 
+const API_BASE = import.meta.env.VITE_API_URL;
+
 const TRACKS = [
   'Applied Science',
   'Engineering & Technological Advancements',
@@ -26,7 +28,7 @@ export default function Submission() {
       Object.entries(form).forEach(([k,v]) => fd.append(k, v));
       if (file) fd.append('file', file);
       
-      const res = await fetch('/api/submissions', { method: 'POST', body: fd });
+      const res = await fetch(`${API_BASE}/api/submissions`, { method: 'POST', body: fd });
       const data = await res.json();
       
       setMsg(res.ok 

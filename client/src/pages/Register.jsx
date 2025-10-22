@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { FaUser, FaEnvelope, FaUserTag, FaCheckCircle, FaExclamationCircle, FaPaperPlane } from 'react-icons/fa';
 
+const API_BASE = import.meta.env.VITE_API_URL;
+
 export default function Register() {
   const [form, setForm] = useState({ fullName:'', email:'', role:'attendee' });
   const [msg, setMsg] = useState('');
@@ -12,7 +14,7 @@ export default function Register() {
     setStatus(null);
     
     try {
-      const res = await fetch('/api/register', {
+      const res = await fetch(`${API_BASE}/api/register`, {
         method: 'POST', 
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(form)
