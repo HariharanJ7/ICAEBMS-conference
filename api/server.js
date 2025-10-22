@@ -11,7 +11,7 @@ import { ensureDirs, assetsDir, uploadsDir, publicDir } from './utils/paths.js';
 import { adminAuth } from './middleware/adminAuth.js';
 import { sendMail } from './utils/mailer.js';
 import path from 'path';
-import { seedDB } from './seed/seedContent.js';
+import { seedContent } from './seed/seedContent.js';
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -22,7 +22,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-seedDB().catch(err => console.error('Seeding error:', err));
+seedContent().catch(err => console.error('Seeding error:', err));
 // Static
 app.use('/assets', express.static(path.join(__dirname, 'public', 'assets')));
 app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')));

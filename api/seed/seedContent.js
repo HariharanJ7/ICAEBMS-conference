@@ -126,7 +126,7 @@ const pages = [
   ]}}
 ];
 
-(async () => {
+export async function seedContent() {
   await mongoose.connect(MONGO_URI);
   await PageContent.deleteOne({ key: 'home' });
   await PageContent.create(homeContent);
@@ -138,5 +138,5 @@ const pages = [
 
   console.log('Seeded content for home + additional pages.');
   await mongoose.disconnect();
-})();
+};
 
