@@ -3,12 +3,12 @@ import { Link, NavLink, useLocation } from 'react-router-dom';
 
 const Nav = () => {
   const [open, setOpen] = React.useState(false);
-  const location = useLocation();
+  const { pathname } = useLocation();
 
-  // Close mobile menu when route changes
+  // Close the mobile menu when the route changes
   React.useEffect(() => {
     setOpen(false);
-  }, [location.pathname]);
+  }, [pathname]);
 
   const links = [
     ['Home','/'],
@@ -23,14 +23,14 @@ const Nav = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur bg-slate-900/85 text-white border-b border-slate-800">
+    <header className="sticky top-0 z-50 bg-slate-900/90 text-white backdrop-blur border-b border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <Link to="/" className="font-extrabold text-xl tracking-tight">
           ICAEBMS 2026
         </Link>
 
-        {/* Desktop / large screens */}
-        <nav className="hidden lg:flex items-center gap-1 text-sm">
+        {/* Desktop nav */}
+        <nav className="hidden md:flex items-center gap-1 text-sm">
           {links.map(([label, to]) => (
             <NavLink
               key={to}
@@ -52,13 +52,13 @@ const Nav = () => {
           ))}
         </nav>
 
-        {/* Mobile toggle (shown on < lg) */}
+        {/* Mobile toggle button */}
         <button
           type="button"
-          className="lg:hidden inline-flex items-center justify-center rounded-full p-2 text-slate-200 hover:text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
+          className="md:hidden inline-flex items-center justify-center rounded-full p-2 text-slate-200 hover:text-white hover:bg-slate-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/70"
           aria-label="Toggle navigation"
           aria-expanded={open}
-          aria-controls="primary-navigation"
+          aria-controls="mobile-menu"
           onClick={() => setOpen((v) => !v)}
         >
           {open ? (
@@ -75,15 +75,12 @@ const Nav = () => {
         </button>
       </div>
 
-      {/* Mobile / tablet menu panel */}
+      {/* Mobile menu (opens only on click) */}
       <div
-        id="primary-navigation"
-        className={[
-          'lg:hidden origin-top transition-all duration-200',
-          open ? 'opacity-100 scale-y-100' : 'opacity-0 scale-y-95 pointer-events-none'
-        ].join(' ')}
+        id="mobile-menu"
+        className={`md:hidden ${open ? 'block' : 'hidden'} border-t border-slate-800 bg-slate-900/95 backdrop-blur`}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-3 pt-1">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
           <nav className="grid gap-1 text-sm">
             {links.map(([label, to]) => (
               <NavLink
